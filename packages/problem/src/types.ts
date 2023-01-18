@@ -9,3 +9,7 @@ export interface ITask {
 export interface IMachine {
     tasks: ITask[]
 }
+
+export interface IProblem {
+    machines: IMachine[]
+}
