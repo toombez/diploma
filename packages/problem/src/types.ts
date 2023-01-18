@@ -1,15 +1,19 @@
+export type Vector<T> = Array<T>
+export type Vector2D<T> = Vector<Vector<T>>
+export type Vector3D<T> = Vector2D<Vector<T>>
+
 export interface IOperation {
     duration: number
 }
 
 export interface ITask {
-    operations: IOperation[]
+    operations: Vector<IOperation>
 }
 
 export interface IMachine {
-    tasks: ITask[]
+    tasks: Vector<ITask>
 }
 
 export interface IProblem {
-    machines: IMachine[]
+    machines: Vector<IMachine>
 }
