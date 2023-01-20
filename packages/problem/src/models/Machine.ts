@@ -1,15 +1,16 @@
-import { IMachine } from "../types"
+import { Vector } from "@diploma/linear-algebra"
+import { IRawMachine } from "../types"
+import Task from "./Task"
 
-interface IMachineOptions extends IMachine {}
-
-export default class Machine implements IMachine {
+export default class Machine {
     public get tasks() {
         return this._tasks
     }
 
-    private _tasks: IMachine['tasks']
+    private _tasks: Vector<Task>
 
-    constructor(options: IMachineOptions) {
-        this._tasks = options.tasks
+    constructor(options: IRawMachine) {
+        const tasks = options.tasks.map(t => new Task(t))
+        this._tasks = new Vector(tasks)
     }
 }

@@ -1,15 +1,16 @@
-import { ITask } from "../types"
+import { Vector } from '@diploma/linear-algebra'
+import { IRawTask } from "../types"
+import Operation from "./Operation"
 
-interface ITaskOptions extends ITask {}
-
-export default class Task implements ITask {
+export default class Task {
     public get operations() {
         return this._operations
     }
 
-    private _operations: ITask['operations']
+    private _operations: Vector<Operation>
 
-    constructor(options: ITaskOptions) {
-        this._operations = options.operations
+    constructor(options: IRawTask) {
+        const operations = options.operations.map(o => new Operation(o))
+        this._operations = new Vector(operations)
     }
 }

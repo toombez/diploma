@@ -1,15 +1,15 @@
-export interface IOperation {
+export interface IRawOperation {
     duration: number
 }
 
-export interface ITask {
-    operations: IOperation[]
+export interface IRawTask {
+    operations: IRawOperation[]
 }
 
-export interface IMachine {
-    tasks: ITask[]
+export interface IRawMachine {
+    tasks: IRawTask[]
 }
 
 export interface IProblem {
-    machines: IMachine[]
+    machines: IRawMachine[]
 }

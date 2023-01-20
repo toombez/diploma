@@ -1,15 +1,13 @@
-import { IOperation } from "../types"
+import { IRawOperation } from "../types"
 
-interface IOperationOptions extends IOperation {}
-
-export default class Operation implements IOperation {
+export default class Operation {
     public get duration() {
         return this._duration
     }
 
-    private _duration: IOperation['duration']
+    private _duration: number
 
-    constructor(options: IOperationOptions) {
+    constructor(options: IRawOperation) {
         this._duration = options.duration
     }
 }
