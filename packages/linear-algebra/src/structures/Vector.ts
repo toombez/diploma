@@ -1,5 +1,17 @@
 export default class Vector<T = number> {
     /**
+     * Deepcopy of private values
+     */
+    public get values() {
+        return structuredClone(this._values)
+    }
+
+    /**
+     * Array values of vector
+     */
+    protected _values: T[];
+
+    /**
      * Create Vector from array of values
      *
      * @param values vector values
@@ -8,39 +20,75 @@ export default class Vector<T = number> {
      * // create vector with values `1`, `2`
      * const vector = new Vector([1, 2])
      */
-    constructor(public values: T[]) {}
+    constructor(values: T[]) {
+        this._values = structuredClone(values)
+    }
 
     /**
      * Get vector value
+     *
+     * Throws `RangeError` if cannot find `value` with `index`
      *
      * @param index index vector component
      * @returns vector value
      */
     public get(index: number) {
-        return this.values[index]
-    }
+        const value = this._values[index]
 
-    public set(value: T, index: number) {
-        this.values[index] = value
-    }
+        if (!value) {
+            throw new RangeError(`Cannot value with ${index} index`)
+        }
 
-    /**
-     * Create Vector from values
-     *
-     * @param values values
-     * @returns new Vector
-     */
-    static fromValues<T = number>(...values: T[]) {
-        return new this(values)
+        return value
     }
 
     /**
-     * Create Vector filled zeros
+     * Set value of vector
      *
-     * @param count vector components count
-     * @returns new Vector with zeros
+     * If index bigger than vector length push it to end
+     *
+     * @param index index to set value
+     * @param value new value
      */
-    public static zeros(count: number) {
-        return new this(new Array(count).fill(0))
+    public set(index: number, value: T) {
+        if (index < 0) {
+            throw new RangeError(`Cannot set value with negative index(${index})`)
+        }
+
+        if (index > this.length) this.push(value)
+        else this._values[index] = value
+    }
+
+    /**
+     * Push value to end vector
+     *
+     * @param value
+     */
+    public push(value: T) {
+        this._values.push(value)
+    }
+
+    // /**
+    //  * Create Vector filled zeros
+    //  *
+    //  * @param count vector components count
+    //  * @returns new Vector with zeros
+    //  */
+    // public static zeros(count: number) {
+    //     return new this(new Array(count).fill(0))
+    // }
+
+    /**
+     * Vector length
+     */
+    public get length() {
+        return this.values.length
+    }
+
+    /**
+     * Is empty vector
+     */
+    public get isEmpty() {
+        return this.length === 0
     }
 }
