@@ -1,6 +1,6 @@
 import Vector from "./Vector"
 
-export default class Vector2<T> extends Vector<Vector<T>> {
+export default class Vector2<T = number> extends Vector<Vector<T>> {
     constructor(values: T[][]) {
         super(values.map((values1) => new Vector(values1)))
     }
