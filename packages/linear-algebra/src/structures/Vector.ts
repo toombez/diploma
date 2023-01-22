@@ -1,27 +1,45 @@
 export default class Vector<T = number> {
     /**
-     * Deepcopy of private values
+     * Public components
      */
-    public get values() {
-        return structuredClone(this._values)
+    public get components() {
+        return structuredClone(this._components)
+    }
+
+    protected set components(components: T[]) {
+        this._components = components
     }
 
     /**
-     * Array values of vector
+     * Components of vector
      */
-    protected _values: T[];
+    private _components: T[];
 
     /**
-     * Create Vector from array of values
+     * Create Vector from array of components
      *
-     * @param values vector values
+     * @param components vector components
      *
      * @example
-     * // create vector with values `1`, `2`
+     * // create vector with components `1`, `2`
      * const vector = new Vector([1, 2])
      */
-    constructor(values: T[]) {
-        this._values = structuredClone(values)
+    constructor(components: T[]) {
+        this._components = structuredClone(components)
+    }
+
+    /**
+     * Vector components count
+     */
+    public get size() {
+        return this._components.length
+    }
+
+    /**
+     * Is empty vector
+     */
+    public get isEmpty() {
+        return this.size === 0
     }
 
     /**
@@ -33,7 +51,7 @@ export default class Vector<T = number> {
      * @returns vector value
      */
     public get(index: number) {
-        const value = this._values[index]
+        const value = this._components[index]
 
         if (!value) {
             throw new RangeError(`Cannot value with ${index} index`)
@@ -43,52 +61,28 @@ export default class Vector<T = number> {
     }
 
     /**
-     * Set value of vector
+     * Set component of vector
      *
-     * If index bigger than vector length push it to end
+     * If `index` bigger than vector length push it to end
      *
      * @param index index to set value
-     * @param value new value
+     * @param component new component
      */
-    public set(index: number, value: T) {
+    public set(index: number, component: T) {
         if (index < 0) {
             throw new RangeError(`Cannot set value with negative index(${index})`)
         }
 
-        if (index > this.length) this.push(value)
-        else this._values[index] = value
+        if (index > this.size) this.push(component)
+        else this._components[index] = component
     }
 
     /**
-     * Push value to end vector
+     * Push component to end vector
      *
-     * @param value
+     * @param component
      */
-    public push(value: T) {
-        this._values.push(value)
-    }
-
-    // /**
-    //  * Create Vector filled zeros
-    //  *
-    //  * @param count vector components count
-    //  * @returns new Vector with zeros
-    //  */
-    // public static zeros(count: number) {
-    //     return new this(new Array(count).fill(0))
-    // }
-
-    /**
-     * Vector length
-     */
-    public get length() {
-        return this.values.length
-    }
-
-    /**
-     * Is empty vector
-     */
-    public get isEmpty() {
-        return this.length === 0
+    public push(component: T) {
+        this._components.push(component)
     }
 }
