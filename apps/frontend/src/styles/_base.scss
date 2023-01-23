@@ -7,3 +7,8 @@
 :root {
     @include utils.register-colors(theme.$colors);
 }
+
+* {
+    padding: 0;
+    margin: 0;
+}

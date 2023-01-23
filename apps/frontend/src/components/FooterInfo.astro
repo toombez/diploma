@@ -1,0 +1,42 @@
+---
+import GradientText from './GradientText.astro';
+
+export interface Props {
+    name: string
+    orientation?: 'vertical' | 'horizontal'
+}
+
+const { name, orientation = 'vertical' } = Astro.props
+---
+
+<li class="info">
+    <span class="info__heading">
+        <GradientText>{ name }:</GradientText>
+    </span>
+    <ul class:list={['info__list', { horizontal: orientation === 'horizontal' }]}>
+        <slot></slot>
+    </ul>
+</li>
+
+<style lang="scss">
+.info {
+    border-left: 2px solid rgb(var(--c-primary));
+
+    padding-left: 8px;
+
+    &__heading {
+        font-size: 36px;
+        font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    &__list {
+        list-style: none;
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.horizontal {
+    flex-direction: row;
+}
+</style>

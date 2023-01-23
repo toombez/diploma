@@ -1,0 +1,96 @@
+---
+import { Icon } from 'astro-icon'
+import FooterInfo from "./FooterInfo.astro";
+import GradientText from "./GradientText.astro";
+---
+
+<footer class="footer">
+    <div class="footer__wrapper">
+        <ul class="info-list">
+            <FooterInfo name="Контакты">
+                <li class="info-item">
+                    email: <a href="mailto:timurtokaevpfm191@gmail.com">timurtokaevpfm191@gmail.com</a>
+                </li>
+            </FooterInfo>
+            <FooterInfo name="Ссылки" orientation={'horizontal'}>
+                <li class="info-item">
+                    <a href="https://github.com/toombez/diploma">
+                        <Icon name="mdi:github" class="icon"></Icon>
+                    </a>
+                </li>
+                <li class="info-item">
+                    <a href="https://vk.com/timurtokaev">
+                        <Icon name="mdi:vk" class="icon"></Icon>
+                    </a>
+                </li>
+            </FooterInfo>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="footer__wrapper">
+        <div class="copyright">
+            <GradientText>
+                © Tokaev Timur 2023
+            </GradientText>
+        </div>
+    </div>
+</footer>
+
+<style lang="scss">
+.footer {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    border-top: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(
+        to right,
+        rgb(var(--c-primary)),
+        rgb(var(--c-secondary))
+    );
+
+    margin-top: 40px;
+    padding: 16px 0;
+
+    &__wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    & > hr {
+        border-color: rgb(var(--c-secondary));
+        margin: 8px;
+    }
+}
+.info-list {
+    list-style: none;
+    padding: none;
+    margin: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+}
+.copyright {
+    font-family: 'Roboto Mono', Courier, monospace;
+    text-align: center;
+    font-size: 24px;
+}
+
+.icon {
+    width: 24px;
+}
+.info-item {
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(var(--c-dark));
+
+    & > a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+</style>
