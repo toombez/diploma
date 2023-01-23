@@ -2,15 +2,16 @@
 import { Icon } from 'astro-icon'
 import GradientText from './GradientText.astro';
 
-interface Props {
+export interface Props {
     heading: string
+    href?: string
     description?: string
 }
 
-const { heading, description } = Astro.props
+const { heading, href, description } = Astro.props
 ---
 
-<div class="card">
+<a class="card" href={href}>
     <h2 class="card__heading">
         <GradientText>{ heading }</GradientText>
     </h2>
@@ -20,13 +21,20 @@ const { heading, description } = Astro.props
             { description }
         </slot>
     </p>
-</div>
+</a>
 
 <style lang="scss">
 .card {
     --border-size: 2px;
     --icon-size: 32px;
     --padding: 16px;
+
+    display: block;
+    text-decoration: none;
+
+    &[href] {
+        cursor: pointer;
+    }
 
     background-color: rgb(var(--c-white));
 
@@ -87,6 +95,7 @@ const { heading, description } = Astro.props
         font-size: 20;
         font-family: 'Courier New', Courier, monospace;
         font-weight: 400;
+        color: rgb(var(--c-dark));
     }
 }
 </style>
