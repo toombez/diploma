@@ -82,7 +82,7 @@ export default class Vector<T = number> {
      *
      * @param component
      */
-    public push(component: T) {
-        this._components.push(component)
+    public push(...component: T[]) {
+        this._components.push(...component)
     }
 }
