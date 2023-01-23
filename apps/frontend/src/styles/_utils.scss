@@ -43,7 +43,7 @@
 /// @param { string } $format font format (default `woft`)
 /// @param { string } $base-fonts-path path for fonts (default `/fonts`)
 /// @return path to font
-@function _get-font-path($font-family, $format: 'wotf', $base-fonts-path: '/fonts') {
+@function _get-font-path($font-family, $format: 'woff', $base-fonts-path: '/fonts') {
     @return '#{$base-fonts-path}/#{$font-family}.#{$format}';
 }
 
@@ -52,12 +52,16 @@
 /// @param { string } $font-family
 /// @param { string } $font-style
 /// @param { number } $font-weight
-@mixin _register-font($font-family,$font-style,$font-weight) {
+@mixin _register-font($font-family, $font-style, $font-weight-name: variable) {
+    $font-path: _get-font-path('#{$font-family}/#{$font-weight-name}-#{$font-style}');
+
+    $font-weight: map-get(fonts.$FONT_WEIGHTS, $font-weight-name);
+
     @font-face {
         font-family: $font-family;
-        font-weight: $font-weight;
         font-style: $font-style;
-        src: local($font-family), url(_get-font-path($font-family));
+        font-weight: $font-weight;
+        src: local($font-family), url($font-path) format(woff);
     }
 }
 
@@ -67,10 +71,16 @@
 @mixin register-fonts($fonts-map) {
     @each $font-family, $styles in $fonts-map {
         @each $font-style, $weights in $styles {
-            @each $font-weight-name in $weights {
-                $font-weight: map-get(fonts.$font-weights, $font-weight-name);
-
-                @include _register-font($font-family, $font-style, $font-weight);
+            @if ($weights == variable) {
+                @include _register-font($font-family, $font-style);
+            } @else {
+                @each $font-weight-name in $weights {
+                    @include _register-font(
+                        $font-family,
+                        $font-style,
+                        $font-weight-name
+                    );
+                }
             }
         }
     }
