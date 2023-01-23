@@ -1,40 +1,43 @@
-import { IMathVector, IStaticMathVector } from "../types"
+import { IMathVector } from "../types"
 import Vector from "./Vector"
-import { staticImplements } from '../utils'
 
 export default class NumberVector extends Vector<number> implements IMathVector<number> {
-    get length(): number {
+    public get length(): number {
         return Math.hypot(...this.components)
     }
-    get normalize(): NumberVector {
+
+    public normalize(): NumberVector {
         const { length } = this
 
         return this.scaleBy(1 / length)
     }
-    get negate(): NumberVector {
+
+    public negate(): NumberVector {
         return this.scaleBy(-1)
     }
 
-    add(vector: NumberVector): NumberVector {
+    // Math operations
+
+    public add(vector: NumberVector): NumberVector {
         return new NumberVector(this.components.map((c, i) => c + vector.components[i]))
     }
 
-    subtract(vector: NumberVector): NumberVector {
-        const negativeVector = vector.negate
+    public subtract(vector: NumberVector): NumberVector {
+        const negativeVector = vector.negate()
 
         return this.add(negativeVector)
     }
 
-    scaleBy(value: number): NumberVector {
+    public scaleBy(value: number): NumberVector {
         return new NumberVector(this.components.map(c => c * value))
     }
 
-    dot(vector: NumberVector): number {
+    public dot(vector: NumberVector): number {
         return vector.components
             .reduce((dot, c, i) => dot + c * this.components[i], 0)
     }
 
-    cross(vector: NumberVector): NumberVector {
+    public cross(vector: NumberVector): NumberVector {
         const { components } = vector
 
         return new NumberVector([
