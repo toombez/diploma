@@ -1,3 +1,10 @@
+type MatrixMapCB<T, K> = (
+    value: T,
+    rowIndex: number,
+    columnIndex: number,
+    matrix: Matrix<T>
+) => K
+
 export default class Matrix<T = number> {
     /**
      * Matrix values
@@ -77,5 +84,21 @@ export default class Matrix<T = number> {
         const oneLengthRows = rowLengths.filter(l => l === matrix[0].length)
 
         return oneLengthRows.length === matrix.length
+    }
+
+    /**
+     * Array map like method
+     *
+     * @param callbackFn callback to run for every value
+     * @returns new matrix
+     */
+    public map<K>(callbackFn: MatrixMapCB<T, K>) {
+        const newValues = this.values.map((row, rowIndex) => {
+            return row.map((value, columnIndex) => {
+                return callbackFn(value, rowIndex, columnIndex, this)
+            })
+        })
+
+        return new Matrix(newValues)
     }
 }
