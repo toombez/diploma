@@ -1,13 +1,34 @@
-import { IRawOperation } from "../types"
+/**
+ * Interface for operation constructor
+ */
+export interface IOperation {
+    duration: number
+}
 
+/**
+ * Model for problem's operation
+ */
 export default class Operation {
-    public get duration() {
-        return this._duration
+    /**
+     * Operation duration
+     */
+    public readonly duration: number
+
+    /**
+     * Create operation
+     * @param operation options for operation
+     */
+    constructor(operation: IOperation) {
+        this.duration = operation.duration
     }
 
-    private _duration: number
-
-    constructor(options: IRawOperation) {
-        this._duration = options.duration
+    /**
+     * Create operaton only from duration
+     *
+     * @param duration
+     * @returns operation
+     */
+    static fromDuration(duration: number) {
+        return new this({ duration })
     }
 }
