@@ -1,7 +1,7 @@
 import { Matrix } from '../src'
 
 describe('Matrix module', () => {
-    it('Matrix from 2d array', () => {
+    test('Matrix from 2d array', () => {
         const rawMatrix = [
             [1],
             [2],
@@ -12,7 +12,7 @@ describe('Matrix module', () => {
         expect(matrix.values).toEqual(rawMatrix)
     })
 
-    it('Matrix from not rectangle 2d array throws error', () => {
+    test('Matrix from not rectangle 2d array throws error', () => {
         const rawMatrix = [
             [1],
             [2, 2],
@@ -22,7 +22,7 @@ describe('Matrix module', () => {
         expect(() => new Matrix(rawMatrix)).toThrow(Error)
     })
 
-    it('Transposed matrix on transponse returns first not transposed matrix', () => {
+    test('Transposed matrix on transponse returns first not transposed matrix', () => {
         const matrix = new Matrix([
             [1, 1, 1],
             [2, 2, 2],

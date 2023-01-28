@@ -1,7 +1,7 @@
 import { NumberVector } from '../src'
 
 describe('NumberVector structure', () => {
-    it('Vector length', () => {
+    test('Vector length', () => {
         const rawVector = [3, 4, 5]
         const vector = new NumberVector([3, 4, 5])
 
@@ -14,7 +14,7 @@ describe('NumberVector structure', () => {
         expect(vector.length).toBe(length)
     })
 
-    it('Negate vector method returns negative direction vector', () => {
+    test('Negate vector method returns negative direction vector', () => {
         const vector = new NumberVector([1, 2, 3])
         const negativeVector = vector.negate()
 
@@ -23,7 +23,7 @@ describe('NumberVector structure', () => {
         expect(negativeVector.components).toStrictEqual(negativeComponents)
     })
 
-    it('Sum of normalized vector components equals 1', () => {
+    test('Sum of normalized vector components equals 1', () => {
         const vector = new NumberVector([1, 2])
         const normalizedVector = vector.normalize()
 

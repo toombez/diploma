@@ -1,14 +1,14 @@
 import { Vector } from '../src/'
 
 describe('Vector structure', () => {
-    it('Size vector', () => {
+    test('Size vector', () => {
         const rawVector = [1, 2, 3]
         const vector = new Vector(rawVector)
 
         expect(vector.size).toBe(rawVector.length)
     })
 
-    it('Pushing component really adding component', () => {
+    test('Pushing component really adding component', () => {
         const vector = new Vector([1, 2, 3])
         const newComponent = 8
 
@@ -19,7 +19,7 @@ describe('Vector structure', () => {
         expect(vector.size).toBe(previousSize + 1)
     })
 
-    it('Pushing components works', () => {
+    test('Pushing components works', () => {
         const vector = new Vector([1, 2, 3])
         const newComponents = [5, 7 , 8]
 
@@ -30,14 +30,14 @@ describe('Vector structure', () => {
         expect(vector.size).toBe(previousSize + newComponents.length)
     })
 
-    it('Vector components isn\'t raw vector array', () => {
+    test('Vector components isn\'t raw vector array', () => {
         const rawVector = [1, 2, 3]
         const vector = new Vector(rawVector)
 
         expect(vector.components).not.toStrictEqual(rawVector)
     })
 
-    it ('Raw vector not affect on vector components', () => {
+    test ('Raw vector not affect on vector components', () => {
         const rawVector = [1, 2, 3]
         const vector = new Vector(rawVector)
 
@@ -46,7 +46,7 @@ describe('Vector structure', () => {
         expect(vector.size).not.toBe(rawVector.length)
     })
 
-    it('Vector components not affect on raw vector', () => {
+    test('Vector components not affect on raw vector', () => {
         const rawVector = [1, 2, 4, 5]
         const vector = new Vector(rawVector)
 
@@ -55,7 +55,7 @@ describe('Vector structure', () => {
         expect(vector.size).not.toBe(rawVector.length)
     })
 
-    it('Vector components returns deepcopy of components', () => {
+    test('Vector components returns deepcopy of components', () => {
         const rawVector: { a: number }[] = [{ a: 2 }]
         const vector = new Vector(rawVector)
 
@@ -65,15 +65,15 @@ describe('Vector structure', () => {
         expect(vector.components[0].a).not.toBe(newComponentAValue)
     })
 
-    it('IsEmpty works', () => {
+    test('IsEmpty works', () => {
         const vector = new Vector([])
 
         expect(vector.isEmpty).toBe(true)
     })
 
-    // it('Get with negative index throws error', () => {
+    // test('Get wtesth negative index throws error', () => {
     //     const vector = new Vector([1])
 
-    //     expect(vector.get(-45)).toThrow(`Cannot value with -45 index`)
+    //     expect(vector.get(-45)).toThrow(`Cannot value wtesth -45 index`)
     // })
 })
