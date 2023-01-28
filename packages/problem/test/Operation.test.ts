@@ -4,11 +4,11 @@ describe('Operation test', () => {
     const duration = 3
 
     test('Create operation from object', () => {
-        expect(new Operation({ duration })).not.toBeUndefined()
+        expect(new Operation({ duration })).toBeDefined()
     })
 
     test('Create operation from duration number', () => {
-        expect(Operation.fromDuration(duration)).not.toBeUndefined()
+        expect(Operation.fromDuration(duration)).toBeDefined()
     })
 
     test('Operation duration return passed duration', () => {
