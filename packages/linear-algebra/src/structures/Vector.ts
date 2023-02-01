@@ -3,24 +3,23 @@ import { cloneDeep } from 'lodash'
 export default class Vector<T = number> {
     /**
      * Vector components
+     *
+     * Don't use it for modify vector
      */
     public get components() {
         return cloneDeep(this._components)
     }
 
     /**
-     * Privete vector components
+     * Private vector components
+     *
+     * Use it if you want change components inside within class
      */
     private _components: T[];
 
     /**
      * Create Vector from array of components
-     *
      * @param components vector components
-     *
-     * @example
-     * // create vector with number components
-     * const vector = new Vector([1, 2])
      */
     constructor(components: T[]) {
         this._components = cloneDeep(components)
@@ -44,7 +43,6 @@ export default class Vector<T = number> {
      * Get vector value
      *
      * Throws `RangeError` if cannot find `value` with `index`
-     *
      * @param index index vector component
      * @returns vector value
      */
@@ -62,7 +60,6 @@ export default class Vector<T = number> {
      * Set component of vector
      *
      * If `index` bigger than vector length push it to end
-     *
      * @param index index to set value
      * @param component new component
      */
@@ -77,8 +74,7 @@ export default class Vector<T = number> {
 
     /**
      * Push component to end vector
-     *
-     * @param component
+     * @param component components to push
      */
     public push(...component: T[]) {
         this._components.push(...component)

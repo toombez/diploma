@@ -27,7 +27,9 @@ export default class Matrix<T = number> {
     }
 
     /**
-     * Real matrix values
+     * Private matrix values
+     *
+     * Use it if you want to change matrix within class
      */
     private _values!: T[][]
 
@@ -63,7 +65,7 @@ export default class Matrix<T = number> {
      */
     public get columns() {
         return this._values[0]
-            .map((_, colIndex) => this.values.map(row => row[colIndex]))
+            .map((_, colIndex) => this._values.map(row => row[colIndex]))
     }
 
     /**
@@ -76,7 +78,6 @@ export default class Matrix<T = number> {
 
     /**
      * Check is matrix have rectangle form
-     *
      * @param matrix target matrix
      * @returns is rectangle form matrix
      */
@@ -95,7 +96,7 @@ export default class Matrix<T = number> {
      * @returns new matrix
      */
     public map<K>(callbackFn: MatrixMapCB<T, K>) {
-        const newValues = this.values.map((row, rowIndex) => {
+        const newValues = this._values.map((row, rowIndex) => {
             return row.map((value, columnIndex) => {
                 return callbackFn(value, rowIndex, columnIndex, this)
             })
