@@ -1,24 +1,37 @@
-import { Vector, Vector2 } from '@diploma/linear-algebra'
+import { Matrix, Vector } from '@diploma/linear-algebra'
+import { cloneDeep } from 'lodash'
 
-import { IProblem } from "../types"
-import Machine from './Machine'
-import Task from './Task'
+import Operation from './Operation'
 
+/**
+ * Model for problem
+ */
 export default class Problem {
-    public machines: Vector<Machine>
-
-    constructor(options: IProblem) {
-        const machines = options.machines.map(m => new Machine(m))
-        this.machines = new Vector(machines)
+    /**
+     * Problem matrix
+     */
+    public get matrix() {
+        return cloneDeep(this._matrix)
     }
 
-    public get aMatrix() {
-        return this.machines.values.map(m => {
-            return m.tasks.values.map(m => m.operations.values.map(o => o.duration))
-        })
+    /**
+     * Private problem matrix
+     */
+    private _matrix: Matrix<number>
+
+    /**
+     * Create problem
+     * @param matrix durations graph matrix
+     */
+    constructor(matrix: Matrix<number>) {
+        this._matrix = matrix
     }
 
-    public operations(task: Task) {
-        return task.operations.values.map(o => o.duration)
+    /**
+     * Matrix of operations
+     */
+    public get OperationsMatrix() {
+        return this._matrix
+            .map(duration => new Operation({ duration }))
     }
 }
