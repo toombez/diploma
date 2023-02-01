@@ -30,7 +30,7 @@ export default class Vector<T = number> {
      * Vector components count
      */
     public get size() {
-        return this.components.length
+        return this._components.length
     }
 
     /**
@@ -49,7 +49,7 @@ export default class Vector<T = number> {
      * @returns vector value
      */
     public get(index: number) {
-        const value = this.components[index]
+        const value = this._components[index]
 
         if (!value) {
             throw new RangeError(`Cannot value with ${index} index`)
@@ -72,7 +72,7 @@ export default class Vector<T = number> {
         }
 
         if (index > this.size) this.push(component)
-        // else this.components[index] = component
+        else this._components[index] = component
     }
 
     /**
@@ -81,6 +81,6 @@ export default class Vector<T = number> {
      * @param component
      */
     public push(...component: T[]) {
-        // this.components.push(...component)
+        this._components.push(...component)
     }
 }

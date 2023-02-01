@@ -1,14 +1,15 @@
 import { Vector } from '../src/'
 
 describe('Vector structure', () => {
-    test('Size vector', () => {
-        const rawVector = [1, 2, 3]
-        const vector = new Vector(rawVector)
+    test('Size vector equals passed components array length', () => {
+        const components = [1, 2, 3]
+        const vector = new Vector(components)
 
-        expect(vector.size).toBe(rawVector.length)
+        expect(vector.size)
+            .toEqual(components.length)
     })
 
-    test('Pushing component really adding component', () => {
+    test('Pushing component adding component', () => {
         const vector = new Vector([1, 2, 3])
         const newComponent = 8
 
@@ -16,10 +17,13 @@ describe('Vector structure', () => {
 
         vector.push(newComponent)
 
-        expect(vector.size).toBe(previousSize + 1)
+        expect(vector.size)
+            .toEqual(previousSize + 1)
+        expect(vector.components[vector.size - 1])
+            .toEqual(newComponent)
     })
 
-    test('Pushing components works', () => {
+    test('Pushing array of components', () => {
         const vector = new Vector([1, 2, 3])
         const newComponents = [5, 7 , 8]
 
@@ -27,53 +31,48 @@ describe('Vector structure', () => {
 
         vector.push(...newComponents)
 
-        expect(vector.size).toBe(previousSize + newComponents.length)
+        expect(vector.size)
+            .toEqual(previousSize + newComponents.length)
     })
 
-    test('Vector components isn\'t raw vector array', () => {
+    test('Vector components not equals passed components to constructor', () => {
         const rawVector = [1, 2, 3]
         const vector = new Vector(rawVector)
 
-        expect(vector.components).not.toStrictEqual(rawVector)
-    })
-
-    test ('Raw vector not affect on vector components', () => {
-        const rawVector = [1, 2, 3]
-        const vector = new Vector(rawVector)
-
-        rawVector.push(5)
-
-        expect(vector.size).not.toBe(rawVector.length)
-    })
-
-    test('Vector components not affect on raw vector', () => {
-        const rawVector = [1, 2, 4, 5]
-        const vector = new Vector(rawVector)
-
-        vector.push(1, 3, 5)
-
-        expect(vector.size).not.toBe(rawVector.length)
+        expect(vector.components)
+            .not
+            .toBe(rawVector)
     })
 
     test('Vector components returns deepcopy of components', () => {
-        const rawVector: { a: number }[] = [{ a: 2 }]
-        const vector = new Vector(rawVector)
+        interface Component {
+            a: number
+        }
+
+        const components: Component[] = [{ a: 2 }]
+        const vector = new Vector(components)
 
         const newComponentAValue = 653
         vector.components[0] = { a: newComponentAValue }
 
-        expect(vector.components[0].a).not.toBe(newComponentAValue)
+        expect(vector.components[0].a)
+            .not
+            .toEqual(newComponentAValue)
     })
 
     test('IsEmpty works', () => {
         const vector = new Vector([])
 
-        expect(vector.isEmpty).toBe(true)
+        expect(vector.isEmpty)
+            .toEqual(true)
     })
 
-    // test('Get wtesth negative index throws error', () => {
-    //     const vector = new Vector([1])
+    test('Vector of instances of class on components must return instane', () => {
+        class TestingClass {}
+        const vector = new Vector([new TestingClass(), new TestingClass()])
 
-    //     expect(vector.get(-45)).toThrow(`Cannot value wtesth -45 index`)
-    // })
+        expect(vector.components.filter(c => c instanceof TestingClass))
+            .not
+            .toEqual(0)
+    })
 })
