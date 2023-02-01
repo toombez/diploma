@@ -19,6 +19,8 @@ export default class Operation {
      * @param operation options for operation
      */
     constructor(operation: IOperation) {
+        this.checkDuration(operation)
+
         this.duration = operation.duration
     }
 
@@ -38,5 +40,20 @@ export default class Operation {
      */
     public isFaster(operation: Operation) {
         return this.duration > operation.duration
+    }
+
+    /**
+     * Check duration is less than zero
+     * @param operation operation with duration
+     * @returns true if no errors
+     */
+    private checkDuration(operation: IOperation): true {
+        const { duration } = operation
+
+        if (duration < 0) {
+            throw new RangeError(`Duration cannot be less than zero. Your value ${duration}`)
+        }
+
+        return true
     }
 }
