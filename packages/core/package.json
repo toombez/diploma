@@ -1,5 +1,5 @@
 {
-  "name": "@diploma/problem",
+  "name": "@diploma/core",
   "version": "0.0.0",
   "main": "src/index.ts",
   "scripts": {
