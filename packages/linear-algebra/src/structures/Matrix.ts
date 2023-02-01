@@ -53,7 +53,7 @@ export default class Matrix<T = number> {
      * Matrix rows
      */
     public get rows() {
-        return this.values
+        return this._values
     }
 
     /**
@@ -62,7 +62,7 @@ export default class Matrix<T = number> {
      * Transposed matrix rows
      */
     public get columns() {
-        return this.values[0]
+        return this._values[0]
             .map((_, colIndex) => this.values.map(row => row[colIndex]))
     }
 

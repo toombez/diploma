@@ -30,7 +30,7 @@ export default class Problem {
     /**
      * Matrix of operations
      */
-    public get OperationsMatrix() {
+    public get operations() {
         return this._matrix
             .map(duration => new Operation({ duration }))
     }
