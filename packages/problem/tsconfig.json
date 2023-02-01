@@ -1,0 +1,6 @@
+{
+    "extends": "@diploma/tsconfig/base.json",
+    "compilerOptions": {
+        "isolatedModules": false
+    }
+}

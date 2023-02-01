@@ -1,0 +1,7 @@
+{
+  "extends": "@diploma/tsconfig/base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "isolatedModules": false
+  }
+}
