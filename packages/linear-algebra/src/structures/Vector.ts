@@ -1,17 +1,15 @@
+import { cloneDeep } from 'lodash'
+
 export default class Vector<T = number> {
     /**
-     * Public components
+     * Vector components
      */
     public get components() {
-        return structuredClone(this._components)
-    }
-
-    protected set components(components: T[]) {
-        this._components = components
+        return cloneDeep(this._components)
     }
 
     /**
-     * Components of vector
+     * Privete vector components
      */
     private _components: T[];
 
@@ -21,18 +19,18 @@ export default class Vector<T = number> {
      * @param components vector components
      *
      * @example
-     * // create vector with components `1`, `2`
+     * // create vector with number components
      * const vector = new Vector([1, 2])
      */
     constructor(components: T[]) {
-        this._components = structuredClone(components)
+        this._components = cloneDeep(components)
     }
 
     /**
      * Vector components count
      */
     public get size() {
-        return this._components.length
+        return this.components.length
     }
 
     /**
@@ -51,7 +49,7 @@ export default class Vector<T = number> {
      * @returns vector value
      */
     public get(index: number) {
-        const value = this._components[index]
+        const value = this.components[index]
 
         if (!value) {
             throw new RangeError(`Cannot value with ${index} index`)
@@ -74,7 +72,7 @@ export default class Vector<T = number> {
         }
 
         if (index > this.size) this.push(component)
-        else this._components[index] = component
+        // else this.components[index] = component
     }
 
     /**
@@ -83,6 +81,6 @@ export default class Vector<T = number> {
      * @param component
      */
     public push(...component: T[]) {
-        this._components.push(...component)
+        // this.components.push(...component)
     }
 }

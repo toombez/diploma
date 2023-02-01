@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash"
+
 type MatrixMapCB<T, K> = (
     value: T,
     rowIndex: number,
@@ -10,18 +12,18 @@ export default class Matrix<T = number> {
      * Matrix values
      */
     public get values() {
-        return structuredClone(this._values)
+        return cloneDeep(this._values)
     }
 
     /**
      * Set matrix values
      */
-    protected set values(values) {
+    private set values(values) {
         if (!this.isRectangle(values)) {
             throw new Error('Matrix must be rectangle form.')
         }
 
-        this._values = structuredClone(values)
+        this._values = cloneDeep(values)
     }
 
     /**
