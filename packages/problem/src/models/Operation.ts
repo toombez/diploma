@@ -24,11 +24,19 @@ export default class Operation {
 
     /**
      * Create operaton only from duration
-     *
      * @param duration
      * @returns operation
      */
     static fromDuration(duration: number) {
         return new this({ duration })
+    }
+
+    /**
+     * Check is faster operation
+     * @param operation another operation
+     * @returns is faster this operation
+     */
+    public isFaster(operation: Operation) {
+        return this.duration > operation.duration
     }
 }
