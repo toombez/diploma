@@ -1,0 +1,15 @@
+<span class="text">
+    <slot></slot>
+</span>
+
+<style>
+.text {
+    background-image: linear-gradient(
+        to right,
+        rgb(var(--c-primary)),
+        rgb(var(--c-secondary))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+</style>

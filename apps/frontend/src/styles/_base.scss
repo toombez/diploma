@@ -1,0 +1,14 @@
+@use 'theme' as theme;
+@use 'fonts' as fonts;
+@use 'utils' as utils;
+
+@include utils.register-fonts(fonts.$fonts);
+
+:root {
+    @include utils.register-colors(theme.$colors);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}

@@ -1,0 +1,22 @@
+$FONT_WEIGHTS : (
+    'thin': 100,
+    'extra lignt': 200,
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+    'semi bold': 600,
+    'bold': 700,
+    'extra bold': 800,
+    'black': 900,
+);
+
+$fonts: (
+    Courier New: (
+        normal: (bold, regular),
+        italic: (bold, regular),
+    ),
+    Roboto Mono: (
+        normal: variable,
+        italic: variable,
+    ),
+);
