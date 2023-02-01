@@ -4,9 +4,9 @@ import { cloneDeep } from 'lodash'
 import Operation from './Operation'
 
 /**
- * Model for problem
+ * Model for schedule
  */
-export default class Problem {
+export default class Schedule {
     /**
      * Problem matrix
      */
